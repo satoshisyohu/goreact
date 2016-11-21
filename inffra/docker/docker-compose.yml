@@ -1,0 +1,11 @@
+mysql:
+  image: mysql
+  ports: 
+    - "3306:3306"
+  volumes:  
+    - myconf.d:/etc/mysql/conf.d 
+  environment:
+    MYSQL_DATABASE: "positive_app" 
+    MYSQL_ROOT_PASSWORD: "positive_app" 
+    MYSQL_USER: "positive_app" 
+    MYSQL_PASSWORD: "positive_app" 

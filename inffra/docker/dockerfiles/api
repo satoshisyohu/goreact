@@ -1,0 +1,64 @@
+FROM ubuntu:14.04
+
+#################################################################################################
+#         Intial paramater setting
+#################################################################################################
+#Docker Setting
+ENV docker_user_name docker_user
+ENV docker_password docker_pass
+ENV docker_home /home/docker_user
+#################################################################################################
+#         Setting up the Ubuntu
+#################################################################################################
+RUN apt-get update && \
+    apt-get install -y gcc build-essential mercurial git subversion wget curl vim iptables sqlite3 \
+                       gfortran e2fslibs-dev openjdk-7-jre-headless libsqlite3-dev mysql-server libmysqld-dev rsync \
+                       dstat sysstat
+RUN echo "docker_user ALL=(ALL) ALL" >> /etc/sudoers
+RUN mkdir -p ${docker_home}
+RUN useradd -b ${docker_home} -p ${docker_password} -d ${docker_home} ${docker_user_name} && \
+    echo ${docker_user_name}:${docker_password} | chpasswd && \
+    chown -R ${docker_user_name} ${docker_home}
+#################################################################################################
+#         Setting Go Lang Enviroments
+#################################################################################################
+# go 1.3 tarball
+RUN wget -qO- http://golang.org/dl/go1.5.3.linux-amd64.tar.gz | tar -C /usr/local -xzf -
+
+# GOPATH
+RUN mkdir -p ${docker_home}/goprojects && \
+    mkdir -p ${docker_home}/goprojects/bin && \
+    mkdir -p ${docker_home}/goprojects/pkg && \
+    mkdir -p ${docker_home}/goprojects/src && \
+    mkdir -p ${docker_home}/goprojects/src/github.com
+RUN mkdir /root/.ssh && chmod 700 /root/.ssh
+
+#################################################################################################
+#         COPY API Directory
+#################################################################################################
+RUN mkdir -p ${docker_home}/goprojects/src/github.com/api && \
+    mkdir -p ${docker_home}/goprojects/src/github.com/api/go_app && \
+    mkdir -p ${docker_home}/goprojects/src/github.com/api/go_app/code
+
+#################################################################################################
+#         Setting Go Lang Variables Enviroments
+#################################################################################################
+
+ENV GOPATH ${docker_home}/goprojects/src/github.com/api/go_app/code
+ENV PATH ${docker_home}/goprojects/src/github.com/api/go_app/code/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+
+RUN go get github.com/revel/revel && \
+    go get github.com/revel/cmd/revel && \
+    go get github.com/dgrijalva/jwt-go && \
+    go get github.com/go-gorp/gorp && \
+    go get github.com/mattn/go-sqlite3 && \
+    go get golang.org/x/crypto/bcrypt && \
+    go get github.com/robfig/cron && \
+    go get github.com/go-sql-driver/mysql
+
+#################################################################################################
+#         If you deploy the app, you should comment out the below command
+#################################################################################################
+RUN chmod -R 777 /home/docker_user/goprojects/src/github.com/api/go_app/code/bin
+WORKDIR  ${docker_home}/goprojects/src/github.com/api/go_app/code
+USER ${docker_user_name}
