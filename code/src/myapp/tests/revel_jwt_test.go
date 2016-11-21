@@ -10,7 +10,7 @@ import (
     "github.com/revel/revel/testing"
 )
 
-type RobohonJWTTest struct {
+type RevelJWTMysqlTest struct {
     testing.TestSuite
 }
 
@@ -39,7 +39,7 @@ var rsaPSSTestData = []struct {
 }
 
 // verify key check
-func (t *RobohonJWTTest) TestRSAPSSVerify() {
+func (t *RevelJWTMysqlTest) TestRSAPSSVerify() {
     var err error
 
     key, _ := ioutil.ReadFile("demo.rsa.pub")
@@ -63,7 +63,7 @@ func (t *RobohonJWTTest) TestRSAPSSVerify() {
 }
 
 // Token Check
-func (t *RobohonJWTTest) TestRSAPSSSign() {
+func (t *RevelJWTMysqlTest) TestRSAPSSSign() {
     var err error
 
     key, _ := ioutil.ReadFile("demo.rsa")
