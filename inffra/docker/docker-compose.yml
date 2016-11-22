@@ -5,7 +5,7 @@ mysql:
   volumes:  
     - myconf.d:/etc/mysql/conf.d 
   environment:
-    MYSQL_DATABASE: "positive_app" 
-    MYSQL_ROOT_PASSWORD: "positive_app" 
-    MYSQL_USER: "positive_app" 
-    MYSQL_PASSWORD: "positive_app" 
+    MYSQL_DATABASE: "revel_jwt_mysqlapp"
+    MYSQL_ROOT_PASSWORD: "revel_jwt_mysqlapp"
+    MYSQL_USER: "revel_jwt_mysqlapp"
+    MYSQL_PASSWORD: "revel_jwt_mysqlapp"

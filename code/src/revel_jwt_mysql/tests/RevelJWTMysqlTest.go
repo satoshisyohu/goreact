@@ -5,53 +5,53 @@ import (
        	"strings"
 )
 
-type RobohonDiaryTest struct {
+type RevelJWTMysqlTest struct {
        	testing.TestSuite
 }
 
-func (t *RobohonDiaryTest) Before() {
+func (t *RevelJWTMysqlTest) Before() {
        	println("Set up")
 }
 
-//ロボホンの日記タイトル取得処理Test
+//の日記タイトル取得処理Test
 
-func (t *RobohonDiaryTest) TestRobohonDiaryIdDateTitle() {
+func (t *RevelJWTMysqlTest) TestRevelJWTMysqlIdDateTitle() {
        	t.Get("/revel_jwt_mysql_diary?Id=1&Date=2016-04-02&Title&JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTQ1NDUwMzIxMywiZXhwIjoxNDkwNjY3MjMyLCJpYXQiOjE0NTQ1MDMyMTMsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.Y6Wz8yods7NFxwYaTnL94CnZfJJ84aLkm592wwNWItY-Z07c2y4ZaoG29izwxZcyPwAKXPwkzmkwooDcwGaXClftoRKkQKd4uu3Ax4d2mJhrQNsmVzhYzsXZEWDH9ORqpGcISssJLA8rSO_dZWrMd8GIzm1jDWKv-zC1O380d8g")
        	t.AssertContains("revel_jwt_mysql_title_1")
        	t.AssertOk()
        	t.AssertContentType("application/json; charset=utf-8")
 }
 
-//ロボホンの日記写真取得処理Test
+//の日記写真取得処理Test
 
-func (t *RobohonDiaryTest) TestRobohonDiaryIdDatePicture() {
+func (t *RevelJWTMysqlTest) TestRevelJWTMysqlIdDatePicture() {
        	t.Get("/revel_jwt_mysql_diary?Id=1&Date=2016-04-02&Picture&JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTQ1NDUwMzIxMywiZXhwIjoxNDkwNjY3MjMyLCJpYXQiOjE0NTQ1MDMyMTMsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.Y6Wz8yods7NFxwYaTnL94CnZfJJ84aLkm592wwNWItY-Z07c2y4ZaoG29izwxZcyPwAKXPwkzmkwooDcwGaXClftoRKkQKd4uu3Ax4d2mJhrQNsmVzhYzsXZEWDH9ORqpGcISssJLA8rSO_dZWrMd8GIzm1jDWKv-zC1O380d8g")
        	t.AssertContains("http://ec2-52-7-241-51.compute-1.amazonaws.com:9000/public/img/20091207-1260117798.jpg")
        	t.AssertOk()
        	t.AssertContentType("application/json; charset=utf-8")
 }
 
-//ロボホンの日記写真リンク取得処理Test
+//の日記写真リンク取得処理Test
 
-func (t *RobohonDiaryTest) TestRobohonDiaryIdDatePictureLink() {
+func (t *RevelJWTMysqlTest) TestRevelJWTMysqlIdDatePictureLink() {
        	t.Get("/revel_jwt_mysql_diary?Id=1&Date=2016-04-02&Picture_Link&JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTQ1NDUwMzIxMywiZXhwIjoxNDkwNjY3MjMyLCJpYXQiOjE0NTQ1MDMyMTMsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.Y6Wz8yods7NFxwYaTnL94CnZfJJ84aLkm592wwNWItY-Z07c2y4ZaoG29izwxZcyPwAKXPwkzmkwooDcwGaXClftoRKkQKd4uu3Ax4d2mJhrQNsmVzhYzsXZEWDH9ORqpGcISssJLA8rSO_dZWrMd8GIzm1jDWKv-zC1O380d8g")
        	t.AssertContains("revel_jwt_mysql_picture_link_1")
        	t.AssertOk()
        	t.AssertContentType("application/json; charset=utf-8")
 }
 
-//ロボホンのキャプション取得処理Test
+//のキャプション取得処理Test
 
-func (t *RobohonDiaryTest) TestRobohonDiaryIdDateCaption() {
+func (t *RevelJWTMysqlTest) TestRevelJWTMysqlIdDateCaption() {
        	t.Get("/revel_jwt_mysql_diary?Id=1&Date=2016-04-02&Caption&JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTQ1NDUwMzIxMywiZXhwIjoxNDkwNjY3MjMyLCJpYXQiOjE0NTQ1MDMyMTMsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.Y6Wz8yods7NFxwYaTnL94CnZfJJ84aLkm592wwNWItY-Z07c2y4ZaoG29izwxZcyPwAKXPwkzmkwooDcwGaXClftoRKkQKd4uu3Ax4d2mJhrQNsmVzhYzsXZEWDH9ORqpGcISssJLA8rSO_dZWrMd8GIzm1jDWKv-zC1O380d8g")
        	t.AssertContains("revel_jwt_mysql_caption_1")
        	t.AssertOk()
        	t.AssertContentType("application/json; charset=utf-8")
 }
 
-//ロボホンの全情報取得処理Test
+//の全情報取得処理Test
 
-func (t *RobohonDiaryTest) TestRobohonDiaryIdAll() {
+func (t *RevelJWTMysqlTest) TestRevelJWTMysqlIdAll() {
        	t.Get("/revel_jwt_mysql_diary?Id=1&Date=2016-04-02&All&JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTQ1NDUwMzIxMywiZXhwIjoxNDkwNjY3MjMyLCJpYXQiOjE0NTQ1MDMyMTMsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.Y6Wz8yods7NFxwYaTnL94CnZfJJ84aLkm592wwNWItY-Z07c2y4ZaoG29izwxZcyPwAKXPwkzmkwooDcwGaXClftoRKkQKd4uu3Ax4d2mJhrQNsmVzhYzsXZEWDH9ORqpGcISssJLA8rSO_dZWrMd8GIzm1jDWKv-zC1O380d8g")
        	t.AssertContains("revel_jwt_mysql_title_1")
        	t.AssertContains("http://ec2-52-7-241-51.compute-1.amazonaws.com:9000/public/img/20091207-1260117798.jpg")
@@ -61,9 +61,9 @@ func (t *RobohonDiaryTest) TestRobohonDiaryIdAll() {
        	t.AssertContentType("application/json; charset=utf-8")
 }
 
-//ロボホンの情報登録処理Test
+//の情報登録処理Test
 
-func (t *RobohonDiaryTest) TestRobohonRegist() {
+func (t *RevelJWTMysqlTest) TestRobohonRegist() {
        	r:=strings.NewReader("4")
        	t.Post("/revel_jwt_mysql_diary_regist?Date=2016-03-29&Title=revel_jwt_mysql_title_regist&Picture=revel_jwt_mysql_picture_regist&Picture_Link=revel_jwt_mysql_picture_link_regist&Caption=revel_jwt_mysql_caption_regist&JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTQ1NDUwMzIxMywiZXhwIjoxNDkwNjY3MjMyLCJpYXQiOjE0NTQ1MDMyMTMsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.Y6Wz8yods7NFxwYaTnL94CnZfJJ84aLkm592wwNWItY-Z07c2y4ZaoG29izwxZcyPwAKXPwkzmkwooDcwGaXClftoRKkQKd4uu3Ax4d2mJhrQNsmVzhYzsXZEWDH9ORqpGcISssJLA8rSO_dZWrMd8GIzm1jDWKv-zC1O380d8g", "application/json; charset=utf-8", r)
        	t.AssertContains("revel_jwt_mysql_title_regist")
@@ -74,9 +74,9 @@ func (t *RobohonDiaryTest) TestRobohonRegist() {
        	t.AssertContentType("application/json; charset=utf-8")
 }
 
-//ロボホンの情報登録処理Error Test
+//の情報登録処理Error Test
 
-func (t *RobohonDiaryTest) TestRobohonRegistError() {
+func (t *RevelJWTMysqlTest) TestRobohonRegistError() {
        	r:=strings.NewReader("4")
        	// Date Nothing
        	t.Post("/revel_jwt_mysql_diary_regist?Title=revel_jwt_mysql_title_regist&Picture=revel_jwt_mysql_picture_regist&Picture_Link=revel_jwt_mysql_picture_link_regist&Caption=revel_jwt_mysql_caption_regist&JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTQ1NDUwMzIxMywiZXhwIjoxNDkwNjY3MjMyLCJpYXQiOjE0NTQ1MDMyMTMsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.Y6Wz8yods7NFxwYaTnL94CnZfJJ84aLkm592wwNWItY-Z07c2y4ZaoG29izwxZcyPwAKXPwkzmkwooDcwGaXClftoRKkQKd4uu3Ax4d2mJhrQNsmVzhYzsXZEWDH9ORqpGcISssJLA8rSO_dZWrMd8GIzm1jDWKv-zC1O380d8g", "application/json; charset=utf-8", r)
@@ -95,18 +95,18 @@ func (t *RobohonDiaryTest) TestRobohonRegistError() {
        	t.AssertStatus(403)
 }
 
-//ロボホン日記情報削除処理Test
+//日記情報削除処理Test
 
-func (t *RobohonDiaryTest) TestRobohonDelete() {
+func (t *RevelJWTMysqlTest) TestRobohonDelete() {
        	t.Delete("/revel_jwt_mysql_delete?Id=5&JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTQ1NDUwMzIxMywiZXhwIjoxNDkwNjY3MjMyLCJpYXQiOjE0NTQ1MDMyMTMsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.Y6Wz8yods7NFxwYaTnL94CnZfJJ84aLkm592wwNWItY-Z07c2y4ZaoG29izwxZcyPwAKXPwkzmkwooDcwGaXClftoRKkQKd4uu3Ax4d2mJhrQNsmVzhYzsXZEWDH9ORqpGcISssJLA8rSO_dZWrMd8GIzm1jDWKv-zC1O380d8g")
        	t.AssertContains("5")
        	t.AssertOk()
        	t.AssertContentType("application/json; charset=utf-8")
 }
 
-//ロボホン日記情報更新処理Test
+//日記情報更新処理Test
 
-func (t *RobohonDiaryTest) TestRobohonUpdate() {
+func (t *RevelJWTMysqlTest) TestRobohonUpdate() {
        	r:=strings.NewReader("4")
        	// Update Title
        	t.Post("/revel_jwt_mysql_diary_update?Id=4&Date=2016-03-29&Title=hogeTitle&JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTQ1NDUwMzIxMywiZXhwIjoxNDkwNjY3MjMyLCJpYXQiOjE0NTQ1MDMyMTMsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.Y6Wz8yods7NFxwYaTnL94CnZfJJ84aLkm592wwNWItY-Z07c2y4ZaoG29izwxZcyPwAKXPwkzmkwooDcwGaXClftoRKkQKd4uu3Ax4d2mJhrQNsmVzhYzsXZEWDH9ORqpGcISssJLA8rSO_dZWrMd8GIzm1jDWKv-zC1O380d8g", "application/json; charset=utf-8", r)
@@ -127,30 +127,30 @@ func (t *RobohonDiaryTest) TestRobohonUpdate() {
        	t.AssertContentType("application/json; charset=utf-8")
 }
 
-//ロボホン日記情報見つからないときの処理Test
+//日記情報見つからないときの処理Test
 
-func (t *RobohonDiaryTest) TestRobohonDiaryIdNotFound() {
+func (t *RevelJWTMysqlTest) TestRevelJWTMysqlIdNotFound() {
        	t.Get("/revel_jwt_mysql_diary")
        	t.AssertNotFound()
 }
 
-//ロボホン日記情報の登録されている日付がないときの処理Test
+//日記情報の登録されている日付がないときの処理Test
 
-func (t *RobohonDiaryTest) TestRobohonDiaryDateNotfound() {
+func (t *RevelJWTMysqlTest) TestRevelJWTMysqlDateNotfound() {
        	t.Get("/revel_jwt_mysql_diary?Id=3&Date=2016-03-26&Title&JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTQ1NDUwMzIxMywiZXhwIjoxNDkwNjY3MjMyLCJpYXQiOjE0NTQ1MDMyMTMsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.Y6Wz8yods7NFxwYaTnL94CnZfJJ84aLkm592wwNWItY-Z07c2y4ZaoG29izwxZcyPwAKXPwkzmkwooDcwGaXClftoRKkQKd4uu3Ax4d2mJhrQNsmVzhYzsXZEWDH9ORqpGcISssJLA8rSO_dZWrMd8GIzm1jDWKv-zC1O380d8g")
        	t.AssertNotFound()
 }
 
-//ロボホン日記情報のJWTトークンが間違っている時の処理Test
+//日記情報のJWTトークンが間違っている時の処理Test
 
-func (t *RobohonDiaryTest) TestRobohonDiaryApiNotCorrect() {
+func (t *RevelJWTMysqlTest) TestRevelJWTMysqlApiNotCorrect() {
        	t.Get("/revel_jwt_mysql_diary?Id=3&Date=2016-04-02&Title&JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTQ1NDUwMzIxMywiZXhwIjoxNDkwNjY3MjMyLCJpYXQiOjE0NTQ1MDMyMTMsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.Y6Wz8yods7NFxwYaTnL94CnZfJJ84aLkm592wwNWItY-Z07c2y4ZaoG29izwxZcyPwAKXPwkzmkwooDcwGaXClftoRKkQKd4uu3Ax4d2mJhrQNsmVzhYzsXZEWDH9ORqpGcISssJLA8rSO_dZWrMd8GIzm1jDWKv-zC1O380d8a")
        	t.AssertStatus(403)
 }
 
-//ロボホン日記情報の日本語が正しく表示されるかテスト
+//日記情報の日本語が正しく表示されるかテスト
 
-func (t *RobohonDiaryTest) TestRobohonDiaryJapanese() {
+func (t *RevelJWTMysqlTest) TestRevelJWTMysqlJapanese() {
        	t.Get("/revel_jwt_mysql_diary?Id=3&Date=2016-04-02&All&JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTQ1NDUwMzIxMywiZXhwIjoxNDkwNjY3MjMyLCJpYXQiOjE0NTQ1MDMyMTMsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.Y6Wz8yods7NFxwYaTnL94CnZfJJ84aLkm592wwNWItY-Z07c2y4ZaoG29izwxZcyPwAKXPwkzmkwooDcwGaXClftoRKkQKd4uu3Ax4d2mJhrQNsmVzhYzsXZEWDH9ORqpGcISssJLA8rSO_dZWrMd8GIzm1jDWKv-zC1O380d8g")
        	t.AssertOk()
        	t.Get("/revel_jwt_mysql_diary?Id=3&Date=2016-04-02&Title&JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTQ1NDUwMzIxMywiZXhwIjoxNDkwNjY3MjMyLCJpYXQiOjE0NTQ1MDMyMTMsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.Y6Wz8yods7NFxwYaTnL94CnZfJJ84aLkm592wwNWItY-Z07c2y4ZaoG29izwxZcyPwAKXPwkzmkwooDcwGaXClftoRKkQKd4uu3Ax4d2mJhrQNsmVzhYzsXZEWDH9ORqpGcISssJLA8rSO_dZWrMd8GIzm1jDWKv-zC1O380d8g")
@@ -165,9 +165,9 @@ func (t *RobohonDiaryTest) TestRobohonDiaryJapanese() {
        	t.AssertContentType("application/json; charset=utf-8")
 }
 
-//ロボホン日記一覧情報取得テスト
+//日記一覧情報取得テスト
 
-func (t *RobohonDiaryTest) TestRobohonDiaryGetAll() {
+func (t *RevelJWTMysqlTest) TestRevelJWTMysqlGetAll() {
        	t.Get("/revel_jwt_mysql_diary_all?Length=2&JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTQ1NDUwMzIxMywiZXhwIjoxNDkwNjY3MjMyLCJpYXQiOjE0NTQ1MDMyMTMsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.Y6Wz8yods7NFxwYaTnL94CnZfJJ84aLkm592wwNWItY-Z07c2y4ZaoG29izwxZcyPwAKXPwkzmkwooDcwGaXClftoRKkQKd4uu3Ax4d2mJhrQNsmVzhYzsXZEWDH9ORqpGcISssJLA8rSO_dZWrMd8GIzm1jDWKv-zC1O380d8g")
        	t.AssertOk()
        	t.AssertContains("[{\"Revel_JWT_MySQL_Id\":1,\"Date\":\"2016-04-02\",\"Title\":\"revel_jwt_mysql_title_1\",\"Picture\":\"http://ec2-52-7-241-51.compute-1.amazonaws.com:9000/public/img/20091207-1260117798.jpg\",\"Picture_Link\":\"revel_jwt_mysql_picture_link_1\",\"Caption\":\"revel_jwt_mysql_caption_1\"},{\"Revel_JWT_MySQL_Id\":2,\"Date\":\"2016-04-02\",\"Title\":\"revel_jwt_mysql_title_2\",\"Picture\":\"http://ec2-52-7-241-51.compute-1.amazonaws.com:9000/public/img/IMG_2875ISUMI_TP_V.jpg\",\"Picture_Link\":\"revel_jwt_mysql_picture_link_2\",\"Caption\":\"revel_jwt_mysql_caption_2\"}]")
@@ -175,42 +175,42 @@ func (t *RobohonDiaryTest) TestRobohonDiaryGetAll() {
     t.AssertOk()
 }
 
-//ロボホン日記一覧情報取得テストパラメータなし
+//日記一覧情報取得テストパラメータなし
 
-func (t *RobohonDiaryTest) TestRobohonDiaryGetAllNonParamater() {
+func (t *RevelJWTMysqlTest) TestRevelJWTMysqlGetAllNonParamater() {
        	t.Get("/revel_jwt_mysql_diary_all?JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTQ1NDUwMzIxMywiZXhwIjoxNDkwNjY3MjMyLCJpYXQiOjE0NTQ1MDMyMTMsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.Y6Wz8yods7NFxwYaTnL94CnZfJJ84aLkm592wwNWItY-Z07c2y4ZaoG29izwxZcyPwAKXPwkzmkwooDcwGaXClftoRKkQKd4uu3Ax4d2mJhrQNsmVzhYzsXZEWDH9ORqpGcISssJLA8rSO_dZWrMd8GIzm1jDWKv-zC1O380d8g")
        	t.AssertStatus(500)
 }
 
-//ロボホン日記一覧情報取得テストパラメータ文字
+//日記一覧情報取得テストパラメータ文字
 
-func (t *RobohonDiaryTest) TestRobohonDiaryGetAllNotCorrectParamater() {
+func (t *RevelJWTMysqlTest) TestRevelJWTMysqlGetAllNotCorrectParamater() {
        	t.Get("/revel_jwt_mysql_diary_all?Length=hoge&JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTQ1NDUwMzIxMywiZXhwIjoxNDkwNjY3MjMyLCJpYXQiOjE0NTQ1MDMyMTMsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.Y6Wz8yods7NFxwYaTnL94CnZfJJ84aLkm592wwNWItY-Z07c2y4ZaoG29izwxZcyPwAKXPwkzmkwooDcwGaXClftoRKkQKd4uu3Ax4d2mJhrQNsmVzhYzsXZEWDH9ORqpGcISssJLA8rSO_dZWrMd8GIzm1jDWKv-zC1O380d8g")
        	t.AssertStatus(403)
 }
 
 
-//ロボホンJWTトークン取得テスト
+//JWTトークン取得テスト
 
-func (t *RobohonDiaryTest) TestRobohonDiaryGetJWT() {
+func (t *RevelJWTMysqlTest) TestRevelJWTMysqlGetJWT() {
        	t.Get("/revel_jwt_mysql_diary_jwt?Limit=72&JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTQ1NDUwMzIxMywiZXhwIjoxNDkwNjY3MjMyLCJpYXQiOjE0NTQ1MDMyMTMsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.Y6Wz8yods7NFxwYaTnL94CnZfJJ84aLkm592wwNWItY-Z07c2y4ZaoG29izwxZcyPwAKXPwkzmkwooDcwGaXClftoRKkQKd4uu3Ax4d2mJhrQNsmVzhYzsXZEWDH9ORqpGcISssJLA8rSO_dZWrMd8GIzm1jDWKv-zC1O380d8g")
        	t.AssertOk()
 }
 
 //JWTトークン取得テストパラメータなし
 
-func (t *RobohonDiaryTest) TestRobohonDiaryGetJWTNonParamater() {
+func (t *RevelJWTMysqlTest) TestRevelJWTMysqlGetJWTNonParamater() {
        	t.Get("/revel_jwt_mysql_diary_jwt?JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTQ1NDUwMzIxMywiZXhwIjoxNDkwNjY3MjMyLCJpYXQiOjE0NTQ1MDMyMTMsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.Y6Wz8yods7NFxwYaTnL94CnZfJJ84aLkm592wwNWItY-Z07c2y4ZaoG29izwxZcyPwAKXPwkzmkwooDcwGaXClftoRKkQKd4uu3Ax4d2mJhrQNsmVzhYzsXZEWDH9ORqpGcISssJLA8rSO_dZWrMd8GIzm1jDWKv-zC1O380d8g")
        	t.AssertStatus(500)
 }
 
 //JWTトークン取得テストパラメータが文字
 
-func (t *RobohonDiaryTest) TestRobohonDiaryGetJWTNotCorrectParamater() {
+func (t *RevelJWTMysqlTest) TestRevelJWTMysqlGetJWTNotCorrectParamater() {
        	t.Get("/revel_jwt_mysql_diary_jwt?Limit=hoge&JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2p3dC1pZHAuZXhhbXBsZS5jb20iLCJzdWIiOiJtYWlsdG86bWlrZUBleGFtcGxlLmNvbSIsIm5iZiI6MTQ1NDUwMzIxMywiZXhwIjoxNDkwNjY3MjMyLCJpYXQiOjE0NTQ1MDMyMTMsImp0aSI6ImlkMTIzNDU2IiwidHlwIjoiaHR0cHM6Ly9leGFtcGxlLmNvbS9yZWdpc3RlciJ9.Y6Wz8yods7NFxwYaTnL94CnZfJJ84aLkm592wwNWItY-Z07c2y4ZaoG29izwxZcyPwAKXPwkzmkwooDcwGaXClftoRKkQKd4uu3Ax4d2mJhrQNsmVzhYzsXZEWDH9ORqpGcISssJLA8rSO_dZWrMd8GIzm1jDWKv-zC1O380d8g")
        	t.AssertStatus(403)
 }
 
-func (t *RobohonDiaryTest) After() {
+func (t *RevelJWTMysqlTest) After() {
        	println("Tear down")
 }

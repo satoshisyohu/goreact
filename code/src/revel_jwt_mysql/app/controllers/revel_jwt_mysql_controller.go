@@ -6,14 +6,14 @@ import (
     "strconv"
     "fmt"
     "github.com/revel/revel"
-    "robohon/app/models"
+    "revel_jwt_mysql/app/models"
     "path/filepath"
     "io/ioutil"
     "crypto/rsa"
     "github.com/dgrijalva/jwt-go"
 )
 
-// の日記のモデルを設定
+// モデルを設定
 // revelでURLパラメータ処理が実行可能
 // gorpでDBの処理
 
@@ -43,11 +43,9 @@ func (c Revel_JWT_MySQL) List() revel.Result {
     c.Params.Bind(&res.Title, "Title")
     c.Params.Bind(&res.Picture, "Picture")
     c.Params.Bind(&res.Picture_Link, "Picture_Link")
-    c.Params.Bind(&res.Caption, "Caption")
-    // の日記全情報を取得（登録情報が多くなるとメモリ負荷が大きくなるため、ここは今後、変更が必要
-    revel_jwt_mysql = c.getRobohonDiary()
+    revel_jwt_mysql = c.getReveJWTMysql()
 
-    // 取得したの日記情報から日付とIDが一致する情報に対して、JWTトークン認証を行なう
+    // 取得したの情報から日付とIDが一致する情報に対して、JWTトークン認証を行なう
     for _, r := range revel_jwt_mysql {
         if (r.Date == res.Date && r.Revel_JWT_MySQL_Id == res.Revel_JWT_MySQL_Id) {
             return c.checkJWTToken(res, "GET")
@@ -57,24 +55,24 @@ func (c Revel_JWT_MySQL) List() revel.Result {
     return c.NotFound("Could not find diary")
 }
 
-// 日記の全情報を取得。SQL部分を変更することで取得する情報のサイズや条件に制限を加えることが可能
+// の全情報を取得。SQL部分を変更することで取得する情報のサイズや条件に制限を加えることが可能
 // Args:無し
-// return: 日記の全情報をmodelで返却
+// return: の全情報をmodelで返却
 
-func (c Revel_JWT_MySQL) getRobohonDiary() []*models.Revel_JWT_MySQL {
+func (c Revel_JWT_MySQL) getReveJWTMysql() []*models.Revel_JWT_MySQL {
     var revel_jwt_mysqls []*models.Revel_JWT_MySQL
-    revel_jwt_mysqls = loadRobohonDiarys(c.Txn.Select(models.Revel_JWT_MySQL{}, `select * from Revel_JWT_MySQL`))
+    revel_jwt_mysqls = loadReveJWTMysqls(c.Txn.Select(models.Revel_JWT_MySQL{}, `select * from Revel_JWT_MySQL`))
 
     return revel_jwt_mysqls
 }
 
-// SQLで取得したの日記情報をモデルに保存して日記全体を取得。
+// SQLで取得したの情報をモデルに保存して全体を取得。
 // Args:
 //     results; SQLで取得された結果
 // return:
 //     []*models.Revel_JWT_MySQL: モデルの配列を返却
 
-func loadRobohonDiarys(results []interface{}, err error) []*models.Revel_JWT_MySQL {
+func loadReveJWTMysqls(results []interface{}, err error) []*models.Revel_JWT_MySQL {
     if err != nil {
         panic(err)
     }
@@ -94,15 +92,15 @@ func loadRobohonDiarys(results []interface{}, err error) []*models.Revel_JWT_MyS
 // 異常終了(404):
 //     return: JWTトークンが異なる
 //     return: JWTトークンが設定されていない
-//     return: 日記が存在しない
+//     return: が存在しない
 
 func (c Revel_JWT_MySQL) checkJWTToken(res models.Revel_JWT_MySQL, choose_parameter string) revel.Result {
     var no_key  bool
     no_key = true
     var check_token bool
 
-    // 日記情報を取得
-    revel_jwt_mysql = c.getRobohonDiary()
+    // 情報を取得
+    revel_jwt_mysql = c.getReveJWTMysql()
     // Debug
     revel.TRACE.Printf("Check initial regist DB Value")
     for _, tmp := range revel_jwt_mysql {
@@ -235,8 +233,8 @@ func read_key(pub_flag bool) ([]byte) {
 }
 // 返却情報処理(Getメソッド)
 // Args:
-//     key: 日記の情報で何を取得するかを選択
-//     revel_jwt_mysql_id: 取得する日記のid
+//     key: 何を取得するかを選択
+//     revel_jwt_mysql_id: 取得するid
 // Return:
 //     revel.Result: 結果を返す
 
@@ -262,8 +260,6 @@ func (c Revel_JWT_MySQL) returnParameter (key string, revel_jwt_mysql_id int) re
         return c.RenderJson(result.Picture)
     case "Picture_Link":
         return c.RenderJson(result.Picture_Link)
-    case "Caption":
-        return c.RenderJson(result.Caption)
     case "All":
         return c.RenderJson(result)
     default:
@@ -283,13 +279,12 @@ func (c Revel_JWT_MySQL) RegistRobohon() revel.Result {
     c.Params.Bind(&res.Date, "Date")
     c.Params.Bind(&res.Picture, "Picture")
     c.Params.Bind(&res.Picture_Link, "Picture_Link")
-    c.Params.Bind(&res.Caption, "Caption")
     return c.checkJWTToken(res, "POST")
 }
 
 // 情報登録処理(registメソッド)
 // Args:
-//     res: の日記情報を登録
+//     res: 情報を登録
 // Return:
 //     revel.Result: 登録した結果を返す
 
@@ -307,7 +302,7 @@ func (c Revel_JWT_MySQL) RegistRobohonMethod(res models.Revel_JWT_MySQL) revel.R
 
     // Revel_JWT_MySQL_Idは主キーに指定しているため、自動で設定されるがモデルの構造上設定が必要
     robohon := models.Revel_JWT_MySQL{res.Revel_JWT_MySQL_Id, t_value, res.Title, res.Picture,
-                                                        res.Picture_Link, res.Caption}
+                                                        res.Picture_Link}
     // DB にデータを登録
     if err := c.Txn.Insert(&robohon); err != nil {
         panic(err)
@@ -319,7 +314,7 @@ func (c Revel_JWT_MySQL) RegistRobohonMethod(res models.Revel_JWT_MySQL) revel.R
 }
 
 // 情報削除処理(Deleteメソッド)
-// URLパラメータから日記idを取得し削除処理を行なう
+// URLパラメータからidを取得し削除処理を行なう
 // Return:
 //     JWTのチェック処理にDELETEメソッドともに送る
 
@@ -331,9 +326,9 @@ func (c Revel_JWT_MySQL) DeleteRobohon() revel.Result {
 
 // 情報削除処理(deleteメソッド)
 // Args:
-//     robohonId: 削除したい日記id
+//     robohonId: 削除したいid
 // Return:
-//     c.RenderJson: 削除した日記idを表示
+//     c.RenderJson: 削除したidを表示
 
 func (c Revel_JWT_MySQL) DeleteRobohonMethod(robohonId int) revel.Result {
 
@@ -351,7 +346,7 @@ func (c Revel_JWT_MySQL) DeleteRobohonMethod(robohonId int) revel.Result {
 
 // 情報更新処理(POSTメソッド)
 // Return:
-//     更新した日記idを表示
+//     更新したidを表示
 
 func (c Revel_JWT_MySQL) UpdateRobohon() revel.Result {
     var res models.Revel_JWT_MySQL
@@ -360,16 +355,15 @@ func (c Revel_JWT_MySQL) UpdateRobohon() revel.Result {
     c.Params.Bind(&res.Date, "Date")
     c.Params.Bind(&res.Picture, "Picture")
     c.Params.Bind(&res.Picture_Link, "Picture_Link")
-    c.Params.Bind(&res.Caption, "Caption")
     return c.checkJWTToken(res, "UPDATE")
 }
 
-// 日記情報更新処理(POSTメソッド)
+// 情報更新処理(POSTメソッド)
 // Args:
 //     key: 更新したいパラメータ
 //     value: 更新する値
-//     robohonId: 更新したい日記id
-//     date: 更新したい日記の日付
+//     robohonId: 更新したいid
+//     date: 更新したい日付
 // Return:
 //     c.RenderJson: 更新したの情報を表示
 
@@ -409,23 +403,23 @@ func (c Revel_JWT_MySQL) UpdateRobohonMethod(key string, value string, robohonId
     return c.RenderJson(r)
 }
 
-// 日記id取得処理
-// 日記idの一覧を取得する。デフォルトの長さは10
+// id取得処理
+// idの一覧を取得する。デフォルトの長さは10
 // Args:
-//     length: 日記idの取得する数(今後増えるので)
+//     length: idの取得する数(今後増えるので)
 // Return:
-//     日記一覧を表示
+//     一覧を表示
 
 func (c Revel_JWT_MySQL) ListAll() revel.Result {
     var res models.Revel_JWT_MySQL
     return c.checkJWTToken(res, "GET_ALL")
 }
 
-// 日記一覧情報取得処理(Getメソッド)
+// 一覧情報取得処理(Getメソッド)
 // Args:
-//     length: 日記の取得する数(今後増えるので)
+//     length: の取得する数(今後増えるので)
 // Return:
-//     revel.Result: 日記一覧を返す
+//     revel.Result: 一覧を返す
 
 func (c Revel_JWT_MySQL) GetRobohonAllMethod (length int) revel.Result {
 
@@ -446,8 +440,8 @@ func (c Revel_JWT_MySQL) GetRobohonAllMethod (length int) revel.Result {
 
 // JWTトークン発行処理
 // JWTトークンの発行処理
-// "iss": "https://jwt-idp.example.com", 日記apiのドメインを設定予定
-// "sub": "mailto:mike@example.com", 日記apiのサブドメインを設定予定
+// "iss": "https://jwt-idp.example.com", apiのドメインを設定予定
+// "sub": "mailto:mike@example.com", apiのサブドメインを設定予定
 // "nbf": 1454503213, JWTが有効になる日時を示す
 // "exp": 1490667232, JWT発行者の識別子
 // "iat": 1454503213, JWTを発行した時刻を示す
@@ -475,15 +469,16 @@ func (c Revel_JWT_MySQL) GetJWTMethod (limit int) revel.Result {
     // 時間情報のフォーマットを設定している
     t_value := time.Now().Format("2006-01-02")
     // Create the token
-    token := jwt.New(jwt.SigningMethodRS256)
+    token := jwt.NewWithClaims(jwt.SigningMethodRS256, jwt.MapClaims{
+        "iss": "https://jwt-idp.example.com",
+        "sub": "mailto:mike@example.com",
+        "nbf": t_value,
+        "exp": time.Now().AddDate(0, 0, limit),
+        "iat": t_value,
+        "jti": "id123456",
+        "type": "JWT",
+    })
     // Set some claims
-    token.Claims["iss"] = "https://jwt-idp.example.com"
-    token.Claims["sub"] = "mailto:mike@example.com"
-    token.Claims["nbf"] = t_value
-    token.Claims["exp"] = time.Now().AddDate(0, 0, limit)
-    token.Claims["iat"] = t_value
-    token.Claims["jti"] = "id123456"
-    token.Claims["typ"] = "JWT"
     // Sign and get the complete encoded token as a string
     key := read_key(false)
     tokenString, err := token.SignedString(key)

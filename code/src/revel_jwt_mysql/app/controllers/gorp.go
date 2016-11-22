@@ -55,7 +55,6 @@ func InitDB() {
        		"Title": 40,
        		"Picture": 140,
        		"Picture_Link": 140,
-       		"Caption": 140,
        	})
 
        	Dbm.TraceOn("[gorp]", r.INFO)
@@ -73,7 +72,7 @@ func InitDB() {
        	revel.TRACE.Printf("%s", prev)
 
        	// 最初に登録するcsv形式のデータ
-       	file, err := os.Open(prev + "/csv_diary_data/revel_jwt_mysql.csv")
+       	file, err := os.Open(prev + "/csv_data/revel_jwt_mysql.csv")
        	failOnError(err)
        	defer file.Close()
 
@@ -94,9 +93,9 @@ func InitDB() {
        		} else {
        			failOnError(err)
        		}
-       		img_data := img_path + recoad[1]
+       		img_data := img_path + recoad[2]
        		revel_jwt_mysqls = append(revel_jwt_mysqls, &models.Revel_JWT_MySQL{f_count, t_value, recoad[0], img_data,
-       			                                                          recoad[2], recoad[3]})
+       			                                                          recoad[1]})
        		f_count++
     }
        	for _, revel_jwt_mysql := range revel_jwt_mysqls {

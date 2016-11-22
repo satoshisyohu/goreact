@@ -12,7 +12,6 @@ type Revel_JWT_MySQL struct {
        	Title         string
        	Picture       string
        	Picture_Link  string
-       	Caption       string
 }
 
 // Url パラメータを処理するのに必要
@@ -32,9 +31,4 @@ func (revel_jwt_mysql Revel_JWT_MySQL) Validate(v *revel.Validation) {
        	v.Required(revel_jwt_mysql.Picture)
        	v.Required(revel_jwt_mysql.Picture_Link)
 
-       	v.Check(revel_jwt_mysql.Caption,
-       		revel.Required{},
-       		revel.MinSize{0},
-       		revel.MaxSize{120},
-       	)
 }

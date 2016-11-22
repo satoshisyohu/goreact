@@ -68,3 +68,12 @@
   sudo: yes
   tags: docker
 
+- name: install docker compose
+  shell: curl -L "{{ docker_compose_url }}$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  sudo: yes
+  tags: docker
+
+- name: add permission docker compose
+  shell: chmod +x /usr/local/bin/docker-compose
+  sudo: yes
+  tags: docker
