@@ -72,7 +72,7 @@ func InitDB() {
        	revel.TRACE.Printf("%s", prev)
 
        	// 最初に登録するcsv形式のデータ
-       	file, err := os.Open(prev + "/controllers/csv_data/revel_jwt_mysql.csv")
+       	file, err := os.Open(prev + "/csv_data/revel_jwt_mysql.csv")
        	failOnError(err)
        	defer file.Close()
 

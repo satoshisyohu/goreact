@@ -471,12 +471,9 @@ func (c Revel_JWT_MySQL) GetJWTMethod (limit int) revel.Result {
     // Create the token
     token := jwt.NewWithClaims(jwt.SigningMethodRS256, jwt.MapClaims{
         "iss": "https://jwt-idp.example.com",
-        "sub": "mailto:mike@example.com",
         "nbf": t_value,
         "exp": time.Now().AddDate(0, 0, limit),
         "iat": t_value,
-        "jti": "id123456",
-        "type": "JWT",
     })
     // Set some claims
     // Sign and get the complete encoded token as a string
