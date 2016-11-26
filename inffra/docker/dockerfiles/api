@@ -63,5 +63,5 @@ RUN chmod -R 777 /home/docker_user/goprojects/src/github.com/api/go_app/code/bin
 RUN chmod -R 777 /home/docker_user/goprojects/src/github.com/api/go_app/code/pkg/
 ADD revel_jwt_mysql ${docker_home}/goprojects/src/github.com/api/go_app/code/src/revel_jwt_mysql
 RUN chmod -R 777 /home/docker_user/goprojects/src/github.com/api/go_app/code/src/
-WORKDIR  ${docker_home}/goprojects/src/github.com/api/go_app/code
+WORKDIR  ${docker_home}/goprojects/src/github.com/api/go_app/code/src/revel_jwt_mysql
 USER ${docker_user_name}

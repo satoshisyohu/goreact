@@ -6,12 +6,12 @@ module:testrunner
 module:jobs
 
 GET        /                                       Application.Index
-GET        /revel_jwt_mysql_diary_jwt                          Revel_JWT_MySQL.List()
-GET        /revel_jwt_mysql_diary_jwt_all                      Revel_JWT_MySQL.ListAll()
-GET        /revel_jwt_mysql_diary_jwt_jwt                      Revel_JWT_MySQL.GetJWT()
-POST       /revel_jwt_mysql_diary_jwt_regist                   Revel_JWT_MySQL.RegistRobohon()
-POST       /revel_jwt_mysql_diary_jwt_update                   Revel_JWT_MySQL.UpdateRobohon()
-DELETE     /revel_jwt_mysql_diary_jwt_delete                         Revel_JWT_MySQL.DeleteRobohon()
+GET        /revel_jwt_mysql                          Revel_JWT_MySQL.List()
+GET        /revel_jwt_mysql_all                      Revel_JWT_MySQL.ListAll()
+GET        /revel_jwt_mysql_jwt                      Revel_JWT_MySQL.GetJWT()
+POST       /revel_jwt_mysql_regist                   Revel_JWT_MySQL.RegistRevelJWTMySQL()
+POST       /revel_jwt_mysql_update                   Revel_JWT_MySQL.UpdateRevelJWTMySQL()
+DELETE     /revel_jwt_mysql_delete                         Revel_JWT_MySQL.DeleteRevelJWTMySQL()
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/*filepath                       Static.Serve("public")
