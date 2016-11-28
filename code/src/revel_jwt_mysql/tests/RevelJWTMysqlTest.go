@@ -154,10 +154,10 @@ func (t *RevelJWTMysqlTest) TestRevelJWTMysqlGetAllNotCorrectParamater() {
 
 //JWTトークン取得テスト
 
-func (t *RevelJWTMysqlTest) TestRevelJWTMysqlGetJWT() {
-       	t.Get("/revel_jwt_mysql_jwt?Limit=72&JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.nK6gM51kP4klRVQoJ0w6dQLQcbQ2Jrf0TPYp9hZS_8mNZWQaHD9zq5-mIFam1xwJt_dorgBhZrfQzu7tKKbeyHmfj6TcWsSJ7T2W6mG0uFSHyAMHJRpjhFrwGB6K5dzUOvcYgw1B1L-AD6-37zWt6tXP_9Y8HVy4xL-oCR_979Y")
-       	t.AssertOk()
-}
+//func (t *RevelJWTMysqlTest) TestRevelJWTMysqlGetJWT() {
+//       	t.Get("/revel_jwt_mysql_jwt?Limit=72&JWTtoken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.nK6gM51kP4klRVQoJ0w6dQLQcbQ2Jrf0TPYp9hZS_8mNZWQaHD9zq5-mIFam1xwJt_dorgBhZrfQzu7tKKbeyHmfj6TcWsSJ7T2W6mG0uFSHyAMHJRpjhFrwGB6K5dzUOvcYgw1B1L-AD6-37zWt6tXP_9Y8HVy4xL-oCR_979Y")
+//       	t.AssertOk()
+//}
 
 //JWTトークン取得テストパラメータなし
 
