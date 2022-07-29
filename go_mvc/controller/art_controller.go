@@ -116,7 +116,7 @@ func Login(c *gin.Context) {
 	err := service.CompareHashAndPassword(dbPassword, formPassword)
 	if err != nil {
 		c.HTML(http.StatusBadRequest, "login.html", gin.H{
-			"err": "ユーザ名とパスワードが間違っえています",
+			"err": "ユーザ名とパスワードが間違っています",
 		})
 		c.Abort()
 	} else {

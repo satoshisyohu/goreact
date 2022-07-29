@@ -9,13 +9,15 @@ import (
 func GetRouter() *gin.Engine {
 	r := gin.Default()
 
+	// r.Static("/", "./index.html")
+
 	store := cookie.NewStore([]byte("secret"))
 	r.Use(sessions.Sessions("mysession", store))
 
 	r.LoadHTMLGlob("templates/*")
-	r.GET("/", ShowAllBlog)
-	r.GET("/show/:id", ShowOneData)
-	r.POST("/create", CreateBlog)
+	// r.GET("/", ShowAllBlog)
+	// r.GET("/show/:id", ShowOneData)
+	// r.POST("/create", CreateBlog)
 	r.GET("/caliculate", Caliculatehome)
 	// r.GET("/caliculate/:gram", Caliculate)
 	r.POST("/new", New)
@@ -23,8 +25,9 @@ func GetRouter() *gin.Engine {
 	r.GET("/signup", SignUpHome)
 	r.GET("/login", LoginHome)
 	r.POST("/login", Login)
-	r.GET("/beans", Beans)
-	r.POST("/beans/register", Register)
+	// r.GET("/beans", Beans)
+	// r.POST("/beans/register", Register)
+	// r.POST("api/alldata", GetAllData)
 
 	return r
 }

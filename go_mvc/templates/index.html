@@ -5,8 +5,8 @@
     </head>
 
     <body>
+        <h1>Beans Counting Application</h1>
 
-        <p>豆に対するお湯の量：豆のグラム数*16倍の湯量</p>
         <div class="input">
             <form action="/new" method="post">
                 <label for="ぐらむ">豆のg数を入力: </label>
@@ -14,8 +14,11 @@
                 <input type="submit" value="送信！!">
             </form>
         </div>
+        
+        <h2 style="color: rebeccapurple;">豆の量：{{.beans_quantity}}g</h1>
 
-        <h1 style="color: rebeccapurple;">{{.message}}</h1>
+        <h2 style="color: rebeccapurple;">お湯の量：{{.boil_water_quantity}}ml</h1>
+        <p>※豆に対するお湯の量：豆のグラム数*16倍の湯量</p>
 
 
     </body>

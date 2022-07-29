@@ -1,7 +1,7 @@
 package model
 
 import (
-	"go_mvc/service"
+	"go_mvc/my-app/src/service"
 	"log"
 )
 
@@ -69,4 +69,12 @@ func RegisterBeans(country, quantity string) error {
 	}
 
 	return nil
+}
+
+func GetAllData() (datas []Coffee_recipe) {
+	result := Db.Find(&datas)
+	if result.Error != nil {
+		panic(result.Error)
+	}
+	return
 }

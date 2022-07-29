@@ -1,1 +1,3 @@
 curl -X POST --data-urlencode 'id=2' -d 'brew_day=20220611' -d 'device=v60' -d 'grind=粗め' -d 'beans=brazil' -d 'shop=County' -d "review=9" -d "other=もっかい飲みたい" http://localhost:8080/create
+
+curl -X POST http://localhost:8080/api/alldata
