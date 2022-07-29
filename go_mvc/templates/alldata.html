@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <meta httpequiv="ContentType" content="text/html;charset=utf8">
+        <title>Test</title>
+    </head>
+
+    <body>
+        {{ range .datas }}
+        <h3>
+            <p>{{.Id}}</p>
+            <ul>
+                <li>{{.Brew_day}}</li>
+                <li>{{.Device}}</li>
+                <li>{{.Grind}}</li>
+                <li>{{.Beans}}</li>
+                <li>{{.Shop}}</li>
+                <li>{{.Review}}</li>
+                <li>{{.Other}}</li>
+            </ul>
+        </h3>
+
+        {{ end }}
+
+
+    </body>
+
+</html>
+

@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <meta httpequiv="ContentType" content="text/html;charset=utf8">
+        <title>usersubscibe</title>
+    </head>
+
+    <body>
+
+        <p>ユーザー登録</p>
+        
+        <div class="input">
+            <p>{{.err}}</p>
+            <form action="/signup" method="post">
+                <label form="ユーザ名">ユーザ名とパスワードを入力: </label>
+                <input type="text" name="username" size="10">
+                <input type="text" name="password" size="10">
+                <input type="submit" value="送信！!">
+            </form>
+        </div>
+
+    </body>
+
+</html>
+

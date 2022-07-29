@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <meta httpequiv="ContentType" content="text/html;charset=utf8">
+        <title>usersubscibe</title>
+    </head>
+
+    <body>
+
+        <p>豆登録</p>
+        
+        <div class="input">
+            <p>{{.err}}</p>
+            <form action="/beans/register" method="post">
+                <label form="豆">豆の種類と量を入力: </label>
+                <input type="text" name="beans" size="10">
+                <input type="text" name="quantity" size="10">
+                <input type="submit" value="送信！!">
+            </form>
+        </div>s
+
+    </body>
+
+</html>
+
